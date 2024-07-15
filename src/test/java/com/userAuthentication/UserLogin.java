@@ -25,6 +25,7 @@ public class UserLogin {
         // Validation by checking the title of product catalog
         assertThat(driver.findElement(By.cssSelector(".product-lable")).getText()).isEqualToIgnoringCase("products");
 
+
     }
 
 }
