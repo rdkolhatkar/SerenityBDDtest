@@ -3,6 +3,7 @@ package com.actionSteps;
 import com.userAuthentication.Users;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.steps.UIInteractionSteps;
+import net.thucydides.core.annotations.findby.By;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -43,8 +44,18 @@ public class LoginActions extends UIInteractionSteps {
     @Step("Login as {0}")
     public void as(Users users){
         openUrl("https://www.saucedemo.com");
+        /*
         find("[data-test='username']").sendKeys(users.getUsername());
         find("[data-test='password']").sendKeys(users.getPassword());
+        find(By.id("user-name")).sendKeys(users.getUsername());
+        find(By.id("password")).sendKeys(users.getPassword());
+        */
+
+        // Serenity can replace find(By.id()) with below annotation symbols like $ and #
+        $("#user-name").sendKeys(users.getUsername());
+        $("#password").sendKeys(users.getPassword());
+
+
         find("[data-test='login-button']").click();
         // Validation by checking the title of product catalog
         assertThat(find(".title").getText()).isEqualToIgnoringCase("products");
