@@ -13,4 +13,8 @@ public class ProductListPageObject extends PageObject {
        // With Serenity we can use the CSS convention Shown Below
         return findAll(".inventory_item_name").textContents();
     }
+
+    public void openProductDetailsFor(String itemName) {
+        find(By.linkText(itemName)).click();
+    }
 }

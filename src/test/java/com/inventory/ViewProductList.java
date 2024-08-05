@@ -16,10 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SerenityRunner.class)
 public class ViewProductList {
-    @Managed
+    @Managed(driver = "chrome") // This line of code is to specify type of driver, No need to add driver.exe file separately. Serenity provides inbuilt driver settings
     WebDriver driver;
     @Steps
     LoginActions login;
+    ProductListPageObject productListPageObject;
+    ProductDetailsPageObject productDetailsPageObject;
 
     ProductListPageObject productList;
     @Test
@@ -28,5 +30,14 @@ public class ViewProductList {
         List<String> productsOnDisplay = productList.titles();
 
         assertThat(productsOnDisplay).hasSize(6).contains("Sauce Labs Backpack");
+    }
+    @Test
+    public void displayCorrectProductDetailsPage(){
+        login.as(Users.STANDARD_USER);
+        String firstItemName = productList.titles().get(0);
+        productList.openProductDetailsFor(firstItemName);
+
+        assertThat(productDetailsPageObject.productName()).isEqualTo(firstItemName);
+
     }
 }
