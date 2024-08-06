@@ -39,5 +39,7 @@ public class ViewProductList {
 
         assertThat(productDetailsPageObject.productName()).isEqualTo(firstItemName);
 
+        productDetailsPageObject.productImageWithValueOf(firstItemName).shouldBeVisible();
+
     }
 }
