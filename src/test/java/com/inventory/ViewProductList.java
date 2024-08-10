@@ -6,6 +6,7 @@ import com.userAuthentication.Users;
 import net.serenitybdd.annotations.Managed;
 import net.serenitybdd.annotations.Steps;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -41,5 +42,19 @@ public class ViewProductList {
 
         productDetailsPageObject.productImageWithValueOf(firstItemName).shouldBeVisible();
 
+    }
+
+    @Test
+    public void CorrespondingImageDisplayForHighlightedProduct(){
+        login.as(Users.STANDARD_USER);
+        List<String> productsOnDisplay = productList.titles();
+
+        // Serenity Provides the soft Assertions method and it helps in rectifying the code breakdown in loop.
+        SoftAssertions softAssertions = new SoftAssertions();
+
+        productsOnDisplay.forEach(
+                productName -> softAssertions.assertThat(productList.imageTextForProduct(productName)).isEqualTo(productName)
+        );
+        softAssertions.assertAll();
     }
 }
