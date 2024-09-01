@@ -57,19 +57,26 @@ public class LoginActions extends UIInteractionSteps {
 
 
         // Serenity can replace find(By.name()) with below annotation symbols like $ and #
+        /*
         $("[name=user-name]").sendKeys(users.getUsername());
         $("[name=password]").sendKeys(users.getPassword());
+        */
 
         /*
         // Serenity can replace find(By.id()) with below annotation symbols like $ and #
         $("#user-name").sendKeys(users.getUsername());
         $("#password").sendKeys(users.getPassword());
         */
-
-
+        /*
         find("[data-test='login-button']").click();
         // Validation by checking the title of product catalog
         assertThat(find(".title").getText()).isEqualToIgnoringCase("products");
+        */
+
+        // Implementation of Serenity Action class called LoginForm
+        find(LoginForm.USER_NAME).sendKeys(users.getUsername());
+        find(LoginForm.PASSWORD).sendKeys(users.getPassword());
+        find(LoginForm.LOGIN_BUTTON).click();
     }
 
 

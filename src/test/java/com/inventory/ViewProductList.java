@@ -2,9 +2,11 @@ package com.inventory;
 
 
 import com.actionSteps.LoginActions;
+import com.actionSteps.ViewProductDetailsAction;
 import com.userAuthentication.Users;
 import net.serenitybdd.annotations.Managed;
 import net.serenitybdd.annotations.Steps;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
@@ -23,6 +25,11 @@ public class ViewProductList {
     LoginActions login;
     ProductListPageObject productListPageObject;
     ProductDetailsPageObject productDetailsPageObject;
+
+    @Steps
+    ViewProductDetailsAction viewProductDetails;
+
+    ProductList productItemList;
 
     ProductListPageObject productList;
     @Test
@@ -56,5 +63,26 @@ public class ViewProductList {
                 productName -> softAssertions.assertThat(productList.imageTextForProduct(productName)).isEqualTo(productName)
         );
         softAssertions.assertAll();
+    }
+
+
+    @Test
+    public void shouldDisplayCorrectProductDetailsPage(){
+        login.as(Users.STANDARD_USER);
+        String firstItemName = productItemList.titles().get(0);
+        //productList.openProductDetailsFor(firstItemName);
+
+        viewProductDetails.forProductWithName(firstItemName);
+
+        // Serenity.reportThat() is an inbuilt feature of serenity for documenting our assertions in serenity report
+
+        Serenity.reportThat("The Product Name should be Correctly Displayed",
+                () ->  assertThat(productItemList.productName()).isEqualTo(firstItemName)
+        );
+
+        Serenity.reportThat("The Product image should have the correct alt text",
+                () -> productDetailsPageObject.productImageWithValueOf(firstItemName).shouldBeVisible()
+        );
+
     }
 }
