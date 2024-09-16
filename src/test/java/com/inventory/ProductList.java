@@ -7,6 +7,10 @@ import java.util.List;
 
 public class ProductList extends PageObject {
 
+    public static By addToCartButtonFor(String itemName) {
+        return By.xpath("//div[@class='inventory_item'][contains(.,'"+ itemName +"')]//button");
+    }
+
     public String productName(){
         return $(".inventory_details_name").getText();
     }
