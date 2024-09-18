@@ -1,9 +1,8 @@
 package com.inventory;
 
 import com.actionSteps.LoginActions;
+import com.addToCart.*;
 import com.addToCart.CartActions;
-import com.addToCart.CartActions;
-import com.addToCart.DisplayShoppingCart;
 import com.addToCart.DisplayShoppingCart;
 import com.userAuthentication.Users;
 import net.serenitybdd.annotations.Managed;
@@ -19,6 +18,7 @@ import java.util.List;
 
 import static com.userAuthentication.Users.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.hamcrest.Matchers.*;
 
 
 /*
@@ -76,11 +76,22 @@ public class AddItemInTheCart {
         Serenity.reportThat("The Shopping cart badge should now be" + cartBadgeCount,
                 () -> assertThat(cartActions.displayedItems()).isEqualTo(selectedItemsFromShoppingInventoryPage)
         );
-
-
     }
-
     private List<String> firstThreeProductTitlesDisplayedOnInventoryPage() {
         return productList.titles().subList(0, 3);
+    }
+
+    CartPageObject cartPageObject;
+    @Test
+    public void priceOfEachItemShownInTheCart(){
+        // add iems to shopping cart
+        cartActions.additems(firstThreeProductTitlesDisplayedOnInventoryPage());
+        // Open the cart page
+        cartPageObject.open();
+        // Check that eatch Item in the cart has a price
+        List<CartItems> items = cartPageObject.items();
+        /*
+        assertThat(items).hasSize(3).allMatch(item -> item.price() > 0.0);
+         */
     }
 }
