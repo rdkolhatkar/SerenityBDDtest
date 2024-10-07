@@ -20,6 +20,9 @@
         <LogBack.version>1.5.6</LogBack.version>
         <lombok.version>1.18.32</lombok.version>
         <hamcrest.version>3.0</hamcrest.version>
+        <testng.version>7.10.2</testng.version>
+        <junitJupiterApi.version>5.11.0</junitJupiterApi.version>
+        <junitJupiterEngine>5.11.0</junitJupiterEngine>
     </properties>
 
     <repositories>
@@ -40,19 +43,36 @@
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-core</artifactId>
             <version>${sereniyCore.version}</version>
+            <scope>compile</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit -->
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-junit</artifactId>
             <version>${serenityJunit.version}</version>
+            <scope>compile</scope> <!-- Add this scope compile to configure serenity classpath in sec/main/java -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${Junit.version}</version>
-            <scope>test</scope>
+            <scope>compile</scope>
+        </dependency>
+        <!-- To add Junit classpath for src/main/java directory implement the following dependencies -->
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junitJupiterApi.version}</version> <!-- Use the latest version -->
+            <scope>compile</scope> <!-- Make JUnit available in src/main -->
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junitJupiterEngine}</version>
+            <scope>compile</scope> <!-- Needed to run JUnit tests from main -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <dependency>
@@ -66,7 +86,7 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${LogBack.version}</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
@@ -80,7 +100,13 @@
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
             <version>${hamcrest.version}</version>
-            <scope>test</scope>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
