@@ -136,9 +136,6 @@
                             <sources>
                                 <source>src/bdd/java</source>
                             </sources>
-                            <testSources>
-                                <testSource>src/bdd/java</testSource>
-                            </testSources>
                         </configuration>
                     </execution>
                 </executions>
