@@ -23,6 +23,7 @@
         <testng.version>7.10.2</testng.version>
         <junitJupiterApi.version>5.11.0</junitJupiterApi.version>
         <junitJupiterEngine>5.11.0</junitJupiterEngine>
+        <serenityRestAssured.version>4.2.3</serenityRestAssured.version>
 
         <mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
         <buildHelperMavenPlugin.version>3.6.0</buildHelperMavenPlugin.version>
@@ -57,6 +58,13 @@
             <version>${serenityJunit.version}</version>
             <scope>compile</scope> <!-- Add this scope compile to configure serenity classpath in sec/main/java -->
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-rest-assured -->
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-rest-assured</artifactId>
+            <version>${serenityRestAssured.version}</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
