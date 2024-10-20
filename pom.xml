@@ -24,6 +24,7 @@
         <junitJupiterApi.version>5.11.0</junitJupiterApi.version>
         <junitJupiterEngine>5.11.0</junitJupiterEngine>
         <serenityRestAssured.version>4.2.3</serenityRestAssured.version>
+        <serenityCucumber.version>4.2.3</serenityCucumber.version>
 
         <mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
         <buildHelperMavenPlugin.version>3.6.0</buildHelperMavenPlugin.version>
@@ -120,7 +121,12 @@
             <version>${testng.version}</version>
             <scope>compile</scope>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-cucumber -->
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>${serenityCucumber.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
