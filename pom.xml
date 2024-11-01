@@ -25,6 +25,7 @@
         <junitJupiterEngine>5.11.0</junitJupiterEngine>
         <serenityRestAssured.version>4.2.3</serenityRestAssured.version>
         <serenityCucumber.version>4.2.3</serenityCucumber.version>
+        <cucumber.version>7.20.1</cucumber.version>
 
         <mavenSurefirePlugin.version>2.22.2</mavenSurefirePlugin.version>
         <buildHelperMavenPlugin.version>3.6.0</buildHelperMavenPlugin.version>
@@ -127,6 +128,13 @@
             <artifactId>serenity-cucumber</artifactId>
             <version>${serenityCucumber.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -7,7 +7,7 @@ Feature: Validate Student Registration Form
     And "Student_Date_Of_Birth" as "<DOB>"
     And "Student_Subjects" as "<subjects>"
     And "Student_Address" as "<currentAddress>"
-    When Gender, Hobby, State and City are selected sucessfully
+    When Gender, Hobby, State and City are selected successfully
     Then Click on Submit button
     Examples:
       | name | email | phone | DOB | subjects | currentAddress |
