@@ -1,5 +1,4 @@
 Feature: Validate REST API
-
   @Api
   Scenario Outline: Verify if Add Place API is working as expected
     Given Attribute "name" as "<name>"
