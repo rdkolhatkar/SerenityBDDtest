@@ -3,7 +3,7 @@ Feature: Validate REST API
   Scenario Outline: Verify if Add Place API is working as expected
     Given Attribute "name" as "<name>"
     And The Attribute "phone_number" as "<phone_number>"
-    And The "address" Attribute as "<address>"
+    And The Address "address" as "<address>"
     And Field "language" as "<language>"
     And URL value of "website" as "<website>"
     When API is invoked

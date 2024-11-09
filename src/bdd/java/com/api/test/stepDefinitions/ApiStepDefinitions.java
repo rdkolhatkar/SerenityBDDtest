@@ -10,4 +10,7 @@ public class ApiStepDefinitions {
     @And("The Attribute {string} as {string}")
     public void theAttributeAs(String arg0, String arg1) {
     }
+    @And("The Address {string} as {string}")
+    public void theAddressAs(String arg0, String arg1) {
+    }
 }
