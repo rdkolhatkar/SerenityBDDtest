@@ -222,6 +222,30 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${mavenSurefirePlugin.version}</version>
+                <executions>
+                    <!-- Custom execution for bddTest -->
+                    <execution>
+                        <id>bddTest</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/ApiTestRunner.class</include> <!-- Include only the Runner class -->
+                            </includes>
+                            <!-- Pass system properties if required -->
+                            <systemProperties>
+                                <!-- Example property -->
+                            </systemProperties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

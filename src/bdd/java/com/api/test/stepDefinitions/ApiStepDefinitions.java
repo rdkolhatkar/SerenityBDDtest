@@ -1,11 +1,17 @@
 package com.api.test.stepDefinitions;
 
+import com.api.test.setup.ApiSetup;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.io.IOException;
+
 public class ApiStepDefinitions {
+
+    ApiSetup apiSetup = new ApiSetup();
+
     @Given("Name {string} as {string}")
     public void nameAs(String arg0, String arg1) {
     }
@@ -22,7 +28,8 @@ public class ApiStepDefinitions {
     public void urlValueOfWebsiteAs(String arg0, String arg1) {
     }
     @When("API is invoked")
-    public void apiIsInvoked() {
+    public void apiIsInvoked() throws IOException {
+        apiSetup.invokeAddPlaceApi();
     }
     @Then("Status response code is {string}")
     public void statusResponseCodeIs(String arg0) {

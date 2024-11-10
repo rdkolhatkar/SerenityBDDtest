@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = {"src/bdd/resources/feature/ApiTest.feature"},
-        tags = "@Test",
+        tags = "@Api",
         glue = {"com.api.test.stepDefinitions"}
 )
 public class ApiTestRunner {
