@@ -1,6 +1,6 @@
 Feature: Validate Student Registration Form
 
-  @Test
+  @StudentApplicationForm
   Scenario Outline: Verify All Web Elements and UI Components of Student Registration Form
     Given Name of the Student "Student_Name" as "<name>"
     And The Email Address of "Student_Email" as "<email>"
