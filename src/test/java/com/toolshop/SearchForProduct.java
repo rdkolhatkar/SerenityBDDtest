@@ -3,6 +3,8 @@ package com.toolshop;
 import net.serenitybdd.core.steps.UIInteractions;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 
+import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -12,20 +14,39 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 public class SearchForProduct extends UIInteractions {
+    @BeforeEach
+    public void openSite(){
+        openUrl("https://practicesoftwaretesting.com/");
+    }
     @Test
     public void searchByKeyword(){
-        openUrl("https://practicesoftwaretesting.com/");
-
         // Enter "Saw" in the search field
         $("#search-query").typeAndEnter("saw");
 
         // Count the number of products
+        List<String> displayProducts = getDisplayedProducts();
+        assertThat(displayProducts).contains("Wood Saw", "Circular Saw");
+    }
+
+    @NotNull
+    private List<String> getDisplayedProducts() {
         List<String> displayProducts
                 = findAll(".card-title")
                 .textContents().stream().map(titleValue -> titleValue.strip())
                 .toList();
+        return displayProducts;
+    }
 
-        //assertThat(displayProducts).contains("Wood Saw", "Circular Saw");
-
+    @Test
+    public void filterSearchResults(){
+        var hammerCheckBox = $("#filters")
+                .findBy("//label[contains(.,'Hammer')]/input");
+        hammerCheckBox.click();
+        boolean isChecked = Boolean.parseBoolean(hammerCheckBox.getAttribute("check"));
+        assertThat(isChecked).isTrue();
+        List<String> displayProducts = getDisplayedProducts();
+        assertThat(displayProducts).allMatch(
+                name -> name.toLowerCase().contains("hammer")
+        );
     }
 }
