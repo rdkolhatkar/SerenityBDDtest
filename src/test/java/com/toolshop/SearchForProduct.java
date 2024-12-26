@@ -49,4 +49,15 @@ public class SearchForProduct extends UIInteractions {
                 name -> name.toLowerCase().contains("hammer")
         );
     }
+
+    @Test
+    public void shouldSortByName(){
+        var sortDropdown = $("[data-test=sort]");
+        sortDropdown.select().byVisibleText("Name (A - Z)");
+        waitFor(250).milliseconds();
+        System.out.println(sortDropdown.getSelectedValues());
+        List<String> displayedProducts = getDisplayedProducts();
+        assertThat(displayedProducts).isSorted();
+
+    }
 }
