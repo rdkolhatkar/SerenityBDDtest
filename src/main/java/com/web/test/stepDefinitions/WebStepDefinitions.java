@@ -31,4 +31,14 @@ public class WebStepDefinitions {
     @Then("Click on Submit button")
     public void clickOnSubmitButton() {
     }
+    @Given("User Navigates to {string}")
+    public void userNavigatesTo(String arg0) {
+
+    }
+    @When("User Clicks on Static Dropdown")
+    public void userClicksOnStaticDropdown() {
+    }
+    @Then("Static Dropdown Box Should display the Correct Value")
+    public void staticDropdownBoxShouldDisplayTheCorrectValue() {
+    }
 }
