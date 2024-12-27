@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"src/main/resources/feature/StudentApplicationForm.feature"},
-        tags = "@Test",
+        features = {"src/main/resources/feature/PracticeSoftwareTestingWeb.feature"},
+        tags = "@CheckStaticDropDown",
         glue = {"com.web.test.stepDefinitions"}
 )
 public class WebTestRunner {
