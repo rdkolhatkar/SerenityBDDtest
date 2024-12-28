@@ -33,9 +33,17 @@ public class DropDownBoxSetup {
         }
         driver.findElement(By.id("btnclosepaxoption")).click();
         System.out.println("Final Value of Passengers = "+driver.findElement(By.id("divpaxinfo")).getText());
+
+    }
+    @Step
+    public void selectDynamicDropDownOfLocation() throws InterruptedException {
+        driver.findElement(By.id("ctl00_mainContent_ddl_originStation1")).click();
+        driver.findElement(By.xpath("//a[@value='MAA']")).click();
+        Thread.sleep(2000L);
+        driver.findElement(By.xpath("(//a[@value='BLR'])[2]")).click();
+        Thread.sleep(2000L);
         driver.close();
     }
-
 
 
 }
