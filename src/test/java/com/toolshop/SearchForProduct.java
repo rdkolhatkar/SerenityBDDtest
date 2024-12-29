@@ -3,10 +3,12 @@ package com.toolshop;
 import net.serenitybdd.core.steps.UIInteractions;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 
+import net.thucydides.core.annotations.findby.By;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -49,7 +51,6 @@ public class SearchForProduct extends UIInteractions {
                 name -> name.toLowerCase().contains("hammer")
         );
     }
-
     @Test
     public void shouldSortByName(){
         var sortDropdown = $("[data-test=sort]");
@@ -59,5 +60,19 @@ public class SearchForProduct extends UIInteractions {
         List<String> displayedProducts = getDisplayedProducts();
         assertThat(displayedProducts).isSorted();
 
+    }
+    @Test
+    public void completeTheContactForm(){
+        find("[role=menubar]").findBy(By.linkText("Contact")).click();
+        $("#first_name").type("Ruochen");
+        $("#last_name").type("Zhang");
+        $("#email").type("RuochenZhang@example.com");
+        $("#subject").selectByVisibleText("Customer Service");
+        $("#message").type("God Emperor");
+        WebElement attachmentField = $("#attachment");
+        upload("data/sample.txt").to(attachmentField);
+        $("[data-test=contact-submit]").click();
+        String responseMessage = $(".alert-success").getText();
+        assertThat(responseMessage).contains("Thanks for your message");
     }
 }
