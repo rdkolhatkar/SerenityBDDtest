@@ -75,4 +75,19 @@ public class SearchForProduct extends UIInteractions {
         String responseMessage = $(".alert-success").getText();
         assertThat(responseMessage).contains("Thanks for your message");
     }
+
+    // Hover and other mouse actions using serenity
+    HoverMousePage hoverPage;
+    @Test
+    public void hoverMouse(){
+        hoverPage.open();
+        hoverPage.hoverOverFigure(1);
+        hoverPage.captionForFigure(1).shouldBeVisible();
+        hoverPage.captionForFigure(1).shouldContainText("user1");
+
+        hoverPage.hoverOverFigure(2);
+        hoverPage.captionForFigure(2).shouldBeVisible();
+        hoverPage.captionForFigure(2).shouldContainText("user2");
+
+    }
 }
