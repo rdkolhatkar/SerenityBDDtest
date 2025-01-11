@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 public class DropDownBoxSetup {
     WebDriver driver = new ChromeDriver();
     WebElement staticDropDown;
@@ -49,6 +51,21 @@ public class DropDownBoxSetup {
         // Child X-PATH -> //a[@value='MAA']
         driver.findElement(By.xpath("//div[@id='glsctl00_mainContent_ddl_destinationStation1_CTNR'] //a[@value='MAA']")).click();
         driver.findElement(By.cssSelector(".ui-state-default.ui-state-highlight.ui-state-active")).click();
+    }
+
+    @Step
+    public void selectAutoSuggestiveDropDown() throws InterruptedException {
+        driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+        driver.findElement(By.id("autosuggest")).sendKeys("ind");
+        Thread.sleep(3000);
+        List<WebElement> options = driver.findElements(By.cssSelector("li[class='ui-menu-item'] a"));
+        for(WebElement option :options){
+            if (option.getText().equalsIgnoreCase("India")) {
+                option.click();
+                break;
+            }
+        }
+
     }
 
 

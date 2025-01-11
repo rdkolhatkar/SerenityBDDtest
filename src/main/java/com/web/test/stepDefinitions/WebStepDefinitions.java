@@ -44,8 +44,9 @@ public class WebStepDefinitions {
     }
     @When("User Clicks on Static Dropdown")
     public void userClicksOnStaticDropdown() throws InterruptedException {
-        dropDownBoxSetup.selectStaticDropDownOfPassengers();
-        dropDownBoxSetup.selectDynamicDropDownOfLocation();
+//        dropDownBoxSetup.selectStaticDropDownOfPassengers();
+//        dropDownBoxSetup.selectDynamicDropDownOfLocation();
+        dropDownBoxSetup.selectAutoSuggestiveDropDown();
     }
     @Then("Static Dropdown Box Should display the Correct Value")
     public void staticDropdownBoxShouldDisplayTheCorrectValue() {
