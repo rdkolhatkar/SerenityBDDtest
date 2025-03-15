@@ -1,56 +1,76 @@
 package com.dataDrivenTest;
 
-import net.serenitybdd.annotations.Managed;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.jupiter.api.Test;
-
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
-
 import java.util.Arrays;
 import java.util.Collection;
+import static org.junit.Assert.assertEquals;
 
-@RunWith(SerenityParameterizedRunner.class)
+
+/**
+ * Serenity BDD Data-Driven Test for Adding Two String Numbers
+ *
+ * This test demonstrates how to use SerenityParameterizedRunner to perform data-driven testing.
+ * It takes two numbers as String inputs, adds them, and verifies the expected total.
+ * The test is executed multiple times with different data sets provided by the @TestData annotation.
+ *
+ * Annotations used:
+ * - @RunWith(SerenityParameterizedRunner.class): Runs the test using Serenity's parameterized runner.
+ * - @TestData(columnNames = "A,B,Total"): Defines test data columns used for the parameterized test.
+ * - @Qualifier: Provides a readable test case name based on input values.
+ * - @Test: Marks the method as a test case.
+ */
+@RunWith(SerenityParameterizedRunner.class) // Serenity runner for data-driven testing
 public class DataDrivenTesting {
 
-    @Managed(driver = "chrome", options = "--headless")
-    WebDriver driver;
 
     private final String a;
     private final String b;
+    private final String expectedTotal;
 
-    public DataDrivenTesting(String a, String b) {
+    public DataDrivenTesting(String a, String b, String expectedTotal) {
         this.a = a;
         this.b = b;
-
+        this.expectedTotal = expectedTotal;
     }
+
+    /**
+     * Provides the test data to be used in the test.
+     * - The data consists of multiple test cases in a list.
+     * - Each test case contains values for "A", "B", and the expected "Total".
+     *
+     * @return A collection of test data values.
+     */
     @TestData(columnNames = "A,B,Total")
-    public static Collection<Object[]> testData(){
-        return Arrays.asList(
-          new Object[][]{
-                  {"1","2","3"},
-                  {"2","3","4"},
-                  {"10","20","30"},
-                  {"10","-7","-3"}
-          }
-        );
+    public static Collection<Object[]> testData() {
+        return Arrays.asList(new Object[][]{
+                {"1", "2", "3"},
+                {"5", "10", "15"},
+                {"100", "200", "300"},
+                {"0", "0", "0"}
+        });
+    }
+    /**
+     * Generates a readable test name for each test execution.
+     * This helps in debugging by displaying meaningful test descriptions in reports.
+     *
+     * @return A formatted string representing the test case scenario.
+     */
+    @Qualifier
+    public String qualifier() {
+        return a + " + " + b + " Should Equal " + expectedTotal;
     }
 
-    @Qualifier
-    public String qualifier(){return a + " + " + b + " Should Equal ";}
-
-
-    public void CalculationTest(){
-
+    @Test
+    public void shouldAddStringNumbersCorrectly() {
         int sum = Integer.parseInt(a) + Integer.parseInt(b);
         String total = String.valueOf(sum);
-
-        // Print the result
-        System.out.println("Total: " + total);
-
-
+        assertEquals("Sum mismatch!", expectedTotal, total);
     }
 
 }
+
+
