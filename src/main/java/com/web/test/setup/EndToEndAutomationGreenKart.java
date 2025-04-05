@@ -30,8 +30,14 @@ public class EndToEndAutomationGreenKart {
            String[] name = products.get(i).getText().split("-");
            String formattedName = name[0].trim();
            List vegetables = Arrays.asList(itemsNeeded);
+           int j =0;
            if(vegetables.contains(formattedName)){
+               j++;
                driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
+               System.out.println(j);
+               if(j == Arrays.stream(itemsNeeded).count()){
+                   break;
+               }
            }
 
        }
