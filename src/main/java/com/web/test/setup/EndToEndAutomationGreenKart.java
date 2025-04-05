@@ -23,9 +23,14 @@ public class EndToEndAutomationGreenKart {
        String[] itemsNeeded = {"Cucumber", "Brocolli", "Beetroot", "Brinjal", "Tomato"};
        List<WebElement> products = driver.findElements(By.cssSelector("h4.product-name"));
        for(int i=0; i< products.size(); i++){
-           String name = products.get(i).getText();
+           // Logic to remove the extra string from the name displayed in the webpage like converting "Brocolli - 1Kg" to "Brocolli"
+           // String name = products.get(i).getText();
+           // name[0] = "Brocolli" & name[1] = "1kg"
+           //remove all the spaces after "Brocolli"
+           String[] name = products.get(i).getText().split("-");
+           String formattedName = name[0].trim();
            List vegetables = Arrays.asList(itemsNeeded);
-           if(vegetables.contains(name)){
+           if(vegetables.contains(formattedName)){
                driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
            }
 
