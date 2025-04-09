@@ -33,7 +33,8 @@ public class EndToEndAutomationGreenKart {
            int j =0;
            if(vegetables.contains(formattedName)){
                j++;
-               driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
+//               driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click(); // This is dynamic x path which changes after first click
+               driver.findElements(By.xpath("//div[@class='product-action']/button")).get(i).click(); // This is static x path for add to cart button which never changes
                System.out.println(j);
                if(j == Arrays.stream(itemsNeeded).count()){
                    break;
