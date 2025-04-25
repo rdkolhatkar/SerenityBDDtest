@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 public class ApiSetup {
 
@@ -23,6 +24,12 @@ public class ApiSetup {
         given().log().all().queryParam("key","qaclick123")
                 .header("Content-Type", "application/json")
                 .body(requestBody).when().post("/maps/api/place/add/json")
-                .then().log().all().assertThat().statusCode(200);
+                // Validating the API Response body
+                .then().log().all().assertThat().statusCode(200).body("scope", equalTo("APP"))
+                // Validation of Response Headers
+                .header("Server", "Apache/2.4.18 (Ubuntu)");
     }
+
+    // Add Place and Update Place and then validate if new address is present in response or not
+
 }
