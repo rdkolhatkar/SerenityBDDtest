@@ -1,1 +1,2 @@
 DemoAPI: https://reqres.in/
+RahulShettyAcademy-AddPlaceApi: https://rahulshettyacademy.com/maps/api/place/add/json
