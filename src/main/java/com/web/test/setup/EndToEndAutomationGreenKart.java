@@ -41,6 +41,10 @@ public class EndToEndAutomationGreenKart {
                }
            }
 
+           driver.findElement(By.cssSelector("img[alt='Cart']")).click(); // clicking on cart button
+           driver.findElement(By.xpath("//button[contains(text(),'PROCEED TO CHECKOUT')]")).click(); // clicking on PROCEED TO CHECKOUT button
+           driver.findElement(By.cssSelector("input.promoCode")).sendKeys("rahulshettyacademy");
+
        }
        Thread.sleep(5000);
        driver.close();
