@@ -1,5 +1,6 @@
 package com.web.test.setup;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import net.thucydides.core.annotations.findby.By;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -8,11 +9,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class EndToEndAutomationGreenKart {
     @Test
     public void greenKartTestAutomation() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
+
+        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.MILLISECONDS); // Implicit wait
+
         driver.get("https://rahulshettyacademy.com/seleniumPractise/");
         /*
         Use the below method when there are multiple elements with same class name, id and css text name present in the Web Page
@@ -33,7 +38,7 @@ public class EndToEndAutomationGreenKart {
            int j =0;
            if(vegetables.contains(formattedName)){
                j++;
-//               driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click(); // This is dynamic x path which changes after first click
+//             driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click(); // This is dynamic x path which changes after first click
                driver.findElements(By.xpath("//div[@class='product-action']/button")).get(i).click(); // This is static x path for add to cart button which never changes
                System.out.println(j);
                if(j == Arrays.stream(itemsNeeded).count()){
@@ -44,9 +49,12 @@ public class EndToEndAutomationGreenKart {
            driver.findElement(By.cssSelector("img[alt='Cart']")).click(); // clicking on cart button
            driver.findElement(By.xpath("//button[contains(text(),'PROCEED TO CHECKOUT')]")).click(); // clicking on PROCEED TO CHECKOUT button
            driver.findElement(By.cssSelector("input.promoCode")).sendKeys("rahulshettyacademy");
+           driver.findElement(By.cssSelector("button.promoBtn")).click();
+           System.out.println(driver.findElement(By.cssSelector("span.promoInfo")).getText());
 
        }
        Thread.sleep(5000);
        driver.close();
+       driver.quit();
     }
 }
