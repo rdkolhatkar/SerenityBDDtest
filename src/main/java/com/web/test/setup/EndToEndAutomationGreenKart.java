@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +20,8 @@ public class EndToEndAutomationGreenKart {
         WebDriver driver = new ChromeDriver();
 
         driver.manage().timeouts().implicitlyWait(5000, TimeUnit.MILLISECONDS); // Implicit wait
+
+        WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofMillis(2500)); //Explicit Wait
 
         driver.get("https://rahulshettyacademy.com/seleniumPractise/");
         /*
@@ -48,8 +53,13 @@ public class EndToEndAutomationGreenKart {
 
            driver.findElement(By.cssSelector("img[alt='Cart']")).click(); // clicking on cart button
            driver.findElement(By.xpath("//button[contains(text(),'PROCEED TO CHECKOUT')]")).click(); // clicking on PROCEED TO CHECKOUT button
+           //Explicit Wait
+           explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input.promoCode")));
            driver.findElement(By.cssSelector("input.promoCode")).sendKeys("rahulshettyacademy");
            driver.findElement(By.cssSelector("button.promoBtn")).click();
+           // Unlike implicit wait we cannot define explicit wait globally. It should only be defined for specific webElement which is taking time to load, Explicit wait does not affect any other steps, it will only affect the targeted step or element
+           // Explicit wait
+           explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.promoInfo")));
            System.out.println(driver.findElement(By.cssSelector("span.promoInfo")).getText());
 
        }
