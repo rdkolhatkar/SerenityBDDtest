@@ -61,6 +61,9 @@ public class EndToEndAutomationGreenKart {
            // Explicit wait
            explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.promoInfo")));
            System.out.println(driver.findElement(By.cssSelector("span.promoInfo")).getText());
+           // Fluent Wait finds the web elements on the regular intervals of time until the timeout or object gets found.
+           // Fluent Wait -> timeout (10 Seconds) polling (2 Seconds) for this case Fluent wait will search the Web elements for 5 times after every 2 seconds for the duration of 10 seconds
+
 
        }
        Thread.sleep(5000);

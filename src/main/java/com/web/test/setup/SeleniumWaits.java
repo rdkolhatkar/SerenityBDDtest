@@ -5,9 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
+import java.util.function.Function;
 
 public class SeleniumWaits {
 
@@ -50,7 +53,53 @@ public class SeleniumWaits {
 
         // Optional: Pause to see the result
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // ********* FLUENT WAIT DEMO *********
+        // This section demonstrates FluentWait without affecting the existing code
+
+        // Click the "Hide" button to hide the text box and then "Display" again to re-show it
+        WebElement hideButton = driver.findElement(By.id("hide-button"));
+        hideButton.click();
+
+        // Wait a bit and click Display again to make it reappear with delay
+        try {
+            Thread.sleep(1000);  // Just to simulate some action delay
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        displayButton.click();
+
+        // Create a FluentWait instance with custom polling and timeout
+        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(15))          // Total timeout of 15 seconds
+                .pollingEvery(Duration.ofSeconds(2))          // Poll every 2 seconds
+                .ignoring(NoSuchElementException.class);      // Ignore NoSuchElementException
+
+        // Wait until the text box becomes visible again using FluentWait
+        WebElement fluentWaitTextBox = fluentWait.until(new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
+                WebElement element = driver.findElement(By.id("displayed-text"));
+                if (element.isDisplayed()) {
+                    System.out.println("Element is visible now!");
+                    return element;
+                } else {
+                    System.out.println("Waiting for element to become visible...");
+                    return null;
+                }
+            }
+        });
+
+        // Interact with the element after FluentWait finds it
+        fluentWaitTextBox.clear();
+        fluentWaitTextBox.sendKeys("Hello from FluentWait!");
+
+        // Optional: Pause to see the result
+        try {
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
