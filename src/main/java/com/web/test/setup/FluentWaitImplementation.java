@@ -27,11 +27,18 @@ public class FluentWaitImplementation {
 
         WebElement element = wait.until(new Function<WebDriver, WebElement>() {
             public WebElement apply(WebDriver driver){
-                return driver.findElement(By.cssSelector("[id='finish'] h4"));
+                //[id='finish'] h4 -> Ths is a static HTML Attribute and When we click on start button it is in disabled mode but after some time it will get enabled. So in this case our assertions will fail
+                //To fix this disabled element issue in our code we have to apply condition to wait until HTML element is enabled
+                if( driver.findElement(By.cssSelector("[id='finish'] h4")).isDisplayed()){
+                    return driver.findElement(By.cssSelector("[id='finish'] h4"));
+                }
+                else {
+                    return null;
+                }
             }
         });
 
-        System.out.println(driver.findElement(By.cssSelector("[id='finish'] h4")).isDisplayed());
+        System.out.println(driver.findElement(By.cssSelector("[id='finish'] h4")).getText());
 
     }
 
