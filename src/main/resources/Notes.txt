@@ -7,3 +7,4 @@ PracticeSoftwareTestingContactForm = https://practicesoftwaretesting.com/contact
 MouseActionsPracticeWebSite =http://the-internet.herokuapp.com/hovers
 AlertHandling =https://rahulshettyacademy.com/AutomationPractice
 FluentWaitPractice =https://the-internet.herokuapp.com/dynamic_loading
+HandlingFramesOnWebPage =http://jqueryui.com/droppable/
