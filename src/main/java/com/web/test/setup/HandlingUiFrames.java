@@ -28,5 +28,6 @@ public class HandlingUiFrames {
         //Now we have to go out of the frame and come back to default web page. For this we use the below method
         driver.switchTo().defaultContent();
 
+
     }
 }
