@@ -3,6 +3,7 @@ package com.web.test.setup;
 
 import net.thucydides.core.annotations.findby.By;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,7 +28,10 @@ public class SeleniumDriverScope {
         System.out.println(columnDriver.findElements(By.tagName("a")).size());
         //Click on each link in the first column and check if page is opening when we click on links
         for(int i=1; i<columnDriver.findElements(By.tagName("a")).size(); i++){
-            columnDriver.findElements(By.tagName("a")).get(i).click();
+            // When we click on each link it will navigate to new web page in the same tab, we have to make sure all links are opening in the new tab and our base browser tab remains the same to click on next link
+            // To solve this problem we have to press Ctrl + link to open link in new tab, for that we will use below method
+            String clickOnLinkNewTab = Keys.chord(Keys.CONTROL,Keys.ENTER);
+            columnDriver.findElements(By.tagName("a")).get(i).sendKeys(clickOnLinkNewTab); //.sendKeys(clickOnLinkNewTab) this method is used for initializing Keyboard events
         }
 
     }
